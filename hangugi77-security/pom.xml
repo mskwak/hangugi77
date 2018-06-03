@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.daou</groupId>
-    <artifactId>security</artifactId>
+    <artifactId>hangugi77-security</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>security</name>
+    <name>hangugi77-security</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>

@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.daou</groupId>
-    <artifactId>algorithm</artifactId>
+    <artifactId>hangugi77-algorithm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>algorithm</name>
+    <name>hangugi77-algorithm</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
