@@ -59,6 +59,7 @@ public class Application {
 			return Mono
 					.just("Hello Reactive")
 					.map(s -> s.toUpperCase())
+					.log()
 					.publishOn(Schedulers.newSingle("publishOn"))
 					.log();
 		}
