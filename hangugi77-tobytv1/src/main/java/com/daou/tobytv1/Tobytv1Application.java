@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.config.EnableWebFlux;
@@ -86,12 +87,19 @@ public class Tobytv1Application {
             });
         }
 
-        @RequestMapping("/hello3")
-        public Publisher<String> hello3(String name) {
+        @RequestMapping("/hello3/{name}")
+        public Publisher<String> hello3(@PathVariable  String name) {
             System.out.println("111111111111: " + Thread.currentThread().getName());
+
             return new Publisher<String>() {
+                public void sout() {
+                    System.out.println("222222222222: " + Thread.currentThread().getName());
+                }
+
                 @Override
                 public void subscribe(Subscriber<? super String> s) {
+                	sout();
+
                     s.onSubscribe(new Subscription() {
                         @Override
                         public void request(long n) {

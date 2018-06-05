@@ -1,6 +1,7 @@
 package com.daou.security.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -20,5 +21,10 @@ public class HelloWorld {
 	@GetMapping("/map")
 	public Map<Integer, Integer> map() {
 		return Map.of(1, 1, 2, 2, 3,3, 4, 4);
+	}
+
+	@GetMapping("/page/{id}")
+	public String id(@PathVariable String id) {
+		return id;
 	}
 }
