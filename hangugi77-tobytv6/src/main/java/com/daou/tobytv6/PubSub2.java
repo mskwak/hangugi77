@@ -1,4 +1,4 @@
-package com.daou.chapter6;
+package com.daou.tobytv6;
 
 import java.util.function.Function;
 import java.util.stream.Collectors;

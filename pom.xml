@@ -10,6 +10,8 @@
 		<module>hangugi77-security</module>
 		<module>hangugi77-seminar</module>
 		<module>hangugi77-webflux</module>
+		<module>hangugi77-tobytv1</module>
+		<module>hangugi77-tobytv6</module>
 	</modules>
   
 	<properties>

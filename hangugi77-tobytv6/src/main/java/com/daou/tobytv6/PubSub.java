@@ -1,4 +1,4 @@
-package com.daou.chapter6;
+package com.daou.tobytv6;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
