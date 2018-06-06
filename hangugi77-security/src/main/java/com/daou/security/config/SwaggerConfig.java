@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig extends WebSecurityConfigurerAdapter {
+public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
@@ -20,10 +20,5 @@ public class SwaggerConfig extends WebSecurityConfigurerAdapter {
 				.apis(RequestHandlerSelectors.basePackage("com.daou"))
 				.paths(PathSelectors.any())
 				.build();
-	}
-
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**", "/h2/**");
 	}
 }
