@@ -19,6 +19,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.logging.Level;
 
 @EnableWebFlux
 @SpringBootApplication
@@ -65,10 +66,12 @@ public class Tobytv1Application {
             System.out.println("111111111111: " + Thread.currentThread().getName());
             return Mono
                     .just("Hello Reactive")
-                    .map(s -> s.toUpperCase())
-                    .log()
-                    .publishOn(Schedulers.newSingle("publishOn"))
-                    .log();
+                    .map(s -> s.toUpperCase() + "xxxxx")
+                    .publishOn(Schedulers.newSingle("publishOn1"))
+                    .log("111")
+                    .map(s -> s.toLowerCase())
+                    .publishOn(Schedulers.newSingle("publishOn2"))
+                    .log("222");
         }
 
         @GetMapping("/hello2")
