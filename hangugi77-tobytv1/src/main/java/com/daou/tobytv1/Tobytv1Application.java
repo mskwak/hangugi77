@@ -19,7 +19,6 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
 
 @EnableWebFlux
 @SpringBootApplication
@@ -66,10 +65,28 @@ public class Tobytv1Application {
             System.out.println("111111111111: " + Thread.currentThread().getName());
             return Mono
                     .just("Hello Reactive")
-                    .map(s -> s.toUpperCase() + "xxxxx")
+                    .map(s -> {
+                        try {
+                            System.out.println("sleep 3 " + Thread.currentThread().getName());
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        return s.toUpperCase() + " xxxxx";
+                    })
                     .publishOn(Schedulers.newSingle("publishOn1"))
                     .log("111")
-                    .map(s -> s.toLowerCase())
+                    .map(s -> {
+                        try {
+                            System.out.println("sleep 1 " + Thread.currentThread().getName());
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        return s.toLowerCase();
+                    })
                     .publishOn(Schedulers.newSingle("publishOn2"))
                     .log("222");
         }
