@@ -24,7 +24,7 @@ public class PasswordEncoderTest {
 	public void encode() {
 		String password = "password";
 		String encPassword = passwordEncoder.encode(password);
-
+		System.out.println(encPassword);
 		assertThat(passwordEncoder.matches(password, encPassword)).isTrue();
 		assertThat(encPassword).contains("{bcrypt}");
 	}

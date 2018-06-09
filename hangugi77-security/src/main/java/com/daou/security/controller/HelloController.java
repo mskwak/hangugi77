@@ -12,6 +12,6 @@ public class HelloController {
 
 	@GetMapping("/login")
 	public String l() {
-		return "index";
+		return "login";
 	}
 }
