@@ -3,12 +3,17 @@ package com.daou.security.config;
 // https://stackoverflow.com/questions/24916894/serving-static-web-resources-in-spring-boot-spring-security-application
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.sql.DataSource;
 
 // 샘플 URL: https://medium.com/@gustavo.ponce.ch/spring-boot-spring-mvc-spring-security-mysql-a5d8545d837d
 // 샘플 URL: https://gs.saro.me/#!m=elec&jn=790
@@ -17,56 +22,64 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 @Slf4j
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//    private final static String USER_QUERY = "SELECT email, password FROM users WHERE email = ?";
+    private final static String USER_QUERY = "SELECT email, password, active FROM user WHERE email = ?";
+    private final static String ROLE_QUERY = "SELECT u.email, r.role FROM user u INNER JOIN user_role ur ON(u.user_id=ur.user_id) INNER JOIN role r ON(ur.role_id=r.role_id) WHERE u.email=?";
 //
-//    @Autowired
-//    private DataSource dataSource;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private DataSource dataSource;
+
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .jdbcAuthentication()
-//                .usersByUsernameQuery(USER_QUERY)
-//                .dataSource(dataSource)
-//                .passwordEncoder(new BCryptPasswordEncoder());
+        auth
+                .jdbcAuthentication()
+                .usersByUsernameQuery(USER_QUERY)
+                .authoritiesByUsernameQuery(ROLE_QUERY)
+                .dataSource(dataSource)
+                .passwordEncoder(bCryptPasswordEncoder);
 
-            auth.inMemoryAuthentication().withUser("user").password("ffff").roles("USER")
-                    .and().withUser("admin").password("ffff").roles("ADMIN", "USER");
+//            auth.inMemoryAuthentication().withUser("user").password("ffff").roles("USER")
+//                    .and().withUser("admin").password("ffff").roles("ADMIN", "USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                    .antMatchers("/").permitAll()
-//                    .antMatchers("/welcome").permitAll()
-//                    .antMatchers("/login").permitAll()
-//                    .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-//                    .authenticated().and().csrf().disable().formLogin()
-////                    .loginPage("/login").failureUrl("/error")
-//                .defaultSuccessUrl("/home")
-////                .usernameParameter("email")
-////                .passwordParameter("password")
-//                .and().logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/").and().exceptionHandling()
-//                .accessDeniedPage("/access-denied");
-
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .anyRequest().authenticated();
+            .antMatchers("/").permitAll()
+            .antMatchers("/login").permitAll()
+            .antMatchers("/registration").permitAll()
+            .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+            .authenticated().and().csrf().disable().formLogin()
+            .loginPage("/login").failureUrl("/login?error=true")
+            .defaultSuccessUrl("/admin/home")
+            .usernameParameter("email")
+            .passwordParameter("password")
+            .and().logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            .logoutSuccessUrl("/").and().exceptionHandling()
+            .accessDeniedPage("/access-denied");
 
-        http.csrf().disable();
 
-        http.formLogin()
-                .loginPage("/login")
-                .failureForwardUrl("/error")
-                .successForwardUrl("/home")
-                .defaultSuccessUrl("/home");
+//        http.authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/login").permitAll()
+//                .anyRequest().authenticated();
+//
+//        http.csrf().disable();
+//
+//        http.formLogin()
+//                .loginPage("/login")
+//                .failureForwardUrl("/error")
+//                .successForwardUrl("/home")
+//                .defaultSuccessUrl("/home");
 
 
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.debug(false).ignoring().antMatchers("/v2/api-docs",
