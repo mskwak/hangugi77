@@ -3,17 +3,12 @@ package com.daou.security.config;
 // https://stackoverflow.com/questions/24916894/serving-static-web-resources-in-spring-boot-spring-security-application
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import javax.sql.DataSource;
 
 // 샘플 URL: https://medium.com/@gustavo.ponce.ch/spring-boot-spring-mvc-spring-security-mysql-a5d8545d837d
 // 샘플 URL: https://gs.saro.me/#!m=elec&jn=790
@@ -21,7 +16,7 @@ import javax.sql.DataSource;
 @Configuration // WebSecurityConfigurerAdapter 상속해서 configure 메소드 overide 할 경우 @Configuration 는 필수다. @Configuration을 설정하지 않으면 아래 configure 메소드가 동작하지 않는다.
 @EnableWebSecurity
 @Slf4j
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    private final static String USER_QUERY = "SELECT email, password FROM users WHERE email = ?";
 //
 //    @Autowired
@@ -34,7 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .usersByUsernameQuery(USER_QUERY)
 //                .dataSource(dataSource)
 //                .passwordEncoder(new BCryptPasswordEncoder());
-
 
             auth.inMemoryAuthentication().withUser("user").password("ffff").roles("USER")
                     .and().withUser("admin").password("ffff").roles("ADMIN", "USER");
@@ -71,10 +65,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successForwardUrl("/home")
                 .defaultSuccessUrl("/home");
 
+
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.debug(false).ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**", "/h2/**", "/images/**");
+        web.debug(false).ignoring().antMatchers("/v2/api-docs",
+                "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**", "/h2/**", "/images/**");
     }
 }
 
