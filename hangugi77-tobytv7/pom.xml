@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.daou</groupId>
-    <artifactId>hangugi77-tobytv6</artifactId>
+    <artifactId>tobytv7</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>hangugi77-tobytv6</name>
+    <name>tobytv7</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -20,7 +20,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>9</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
