@@ -37,6 +37,7 @@ public class SchedulersEx {
 //		};
 
 		Publisher<Integer> pub = sub -> {
+
 			sub.onSubscribe(new Subscription() {
 
 				// 아래 request 메소드 부분을 별도의 스레드에서 실행시키는 것이 목적이다.
