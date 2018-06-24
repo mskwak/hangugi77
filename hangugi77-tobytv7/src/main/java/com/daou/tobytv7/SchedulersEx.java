@@ -15,29 +15,7 @@ public class SchedulersEx {
 	public static Logger logger = LoggerFactory.getLogger(SchedulersEx.class);
 
 	public static void main(String[] args) {
-//		Publisher<Integer> pub = new Publisher<Integer>() {
-//			@Override
-//			public void subscribe(Subscriber<? super Integer> sub) {
-//				sub.onSubscribe(new Subscription() {
-//					@Override
-//					public void request(long n) {
-//						sub.onNext(1);
-//						sub.onNext(2);
-//						sub.onNext(3);
-//						sub.onNext(4);
-//						sub.onNext(5);
-//					}
-//
-//					@Override
-//					public void cancel() {
-//
-//					}
-//				});
-//			}
-//		};
-
 		Publisher<Integer> pub = sub -> {
-
 			sub.onSubscribe(new Subscription() {
 
 				// 아래 request 메소드 부분을 별도의 스레드에서 실행시키는 것이 목적이다.
