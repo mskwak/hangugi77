@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.daou</groupId>
-    <artifactId>tobytv7</artifactId>
+    <artifactId>hangugi77-tobytv7</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>tobytv7</name>
+    <name>hangugi77-tobytv7</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
