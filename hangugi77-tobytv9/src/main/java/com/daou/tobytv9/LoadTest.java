@@ -16,7 +16,7 @@ public class LoadTest {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(100);
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8080/rest";
+        String url = "http://localhost:8080/rest?idx={idx}";
 
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -24,15 +24,16 @@ public class LoadTest {
         for(int i = 0; i < 100; i++) {
             executorService.execute(() -> {
                 int idx = counter.addAndGet(1);
-                log.info("Thread {}", idx);
+//                log.info("Thread {}", idx);
 
                 StopWatch inner = new StopWatch();
                 inner.start();
 
-                restTemplate.getForObject(url, String.class);
+                String result = restTemplate.getForObject(url, String.class, idx);
+                log.info(Thread.currentThread().getName() + ": " + result);
 
                 inner.stop();
-                log.info("Elapsed: {} {}", idx, inner.getTotalTimeSeconds());
+//                log.info("Elapsed: {} {}", idx, inner.getTotalTimeSeconds());
             });
         }
 
