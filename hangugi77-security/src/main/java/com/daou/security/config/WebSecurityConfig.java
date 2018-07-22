@@ -2,6 +2,7 @@ package com.daou.security.config;
 
 // https://stackoverflow.com/questions/24916894/serving-static-web-resources-in-spring-boot-spring-security-application
 
+import com.daou.security.encoder.TestPlainPasswordEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -24,13 +24,13 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final static String USER_QUERY = "SELECT email, password, active FROM user WHERE email = ?";
     private final static String ROLE_QUERY = "SELECT u.email, r.role FROM user u INNER JOIN user_role ur ON(u.user_id=ur.user_id) INNER JOIN role r ON(ur.role_id=r.role_id) WHERE u.email=?";
-//
+
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private TestPlainPasswordEncoder testPlainPasswordEncoder;
 
     @Autowired
     private DataSource dataSource;
-
 
 
     @Override
@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery(USER_QUERY)
                 .authoritiesByUsernameQuery(ROLE_QUERY)
                 .dataSource(dataSource)
-                .passwordEncoder(bCryptPasswordEncoder);
+                .passwordEncoder(testPlainPasswordEncoder);
 
 //            auth.inMemoryAuthentication().withUser("user").password("ffff").roles("USER")
 //                    .and().withUser("admin").password("ffff").roles("ADMIN", "USER");

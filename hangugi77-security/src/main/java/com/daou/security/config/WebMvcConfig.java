@@ -1,17 +1,18 @@
 package com.daou.security.config;
 
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
+import com.daou.security.encoder.TestPlainPasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 public class WebMvcConfig {
+//    @Bean
+//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public TestPlainPasswordEncoder testPlainPasswordEncoder() {
+        return new TestPlainPasswordEncoder();
     }
 }
