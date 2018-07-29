@@ -37,6 +37,7 @@ public class UsersRouter {
 
 	@RequestMapping("/hello")
 	public Mono<String> hello() {
+		Mono.fromSupplier(() -> "data").publishOn(Schedulers.newSingle("singleThead")).subscribeOn(Schedulers.newSingle("publisher"));
 		return Mono.just("hello reacitve").map(s -> s.toUpperCase()).publishOn(Schedulers.newSingle("xxxx")).log();
 	}
 }

@@ -1,0 +1,10 @@
+zuul:
+  routes:
+    default:
+    path: /
+    url: http://localhost:9000
+ribbon:
+  eureka:
+    enabled: false
+server:
+  port: 80
