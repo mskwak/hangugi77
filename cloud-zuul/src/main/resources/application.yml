@@ -1,8 +1,8 @@
 zuul:
   routes:
-    default:
-    path: /
-    url: http://localhost:9000
+    foo:
+      path: /bar/**
+      url: http://www.naver.com
 ribbon:
   eureka:
     enabled: false

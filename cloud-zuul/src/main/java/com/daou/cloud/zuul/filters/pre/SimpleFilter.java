@@ -5,25 +5,30 @@ import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Component
 public class SimpleFilter extends ZuulFilter {
     private static Logger log = LoggerFactory.getLogger(SimpleFilter.class);
 
     @Override
     public String filterType() {
-        return "filterType";
+        System.out.println("1111111");
+        return "pre";
     }
 
     @Override
     public int filterOrder() {
-        return 0;
+        System.out.println("2222222");
+        return 1;
     }
 
     @Override
     public boolean shouldFilter() {
-        return false;
+        System.out.println("3333333");
+        return true;
     }
 
     @Override
