@@ -6,10 +6,10 @@ import org.reactivestreams.Subscriber;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class PuberOperator implements Publisher<String> {
+public class PublisherOperator implements Publisher<String> {
     private Publisher publisher;
 
-    public PuberOperator(Publisher publisher) {
+    public PublisherOperator(Publisher publisher) {
         this.publisher = publisher;
     }
 

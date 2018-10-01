@@ -6,12 +6,12 @@ import org.reactivestreams.Subscription;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SuberOperator implements Subscriber<String> {
+public class SubscriberOperator implements Subscriber<String> {
     private Subscriber subscriber;
 
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    public SuberOperator(Subscriber subscriber) {
+    public SubscriberOperator(Subscriber subscriber) {
         this.subscriber = subscriber;
     }
 

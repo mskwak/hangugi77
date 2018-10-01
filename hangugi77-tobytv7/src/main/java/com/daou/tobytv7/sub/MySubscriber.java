@@ -1,12 +1,12 @@
-package com.daou.tobytv7.pub;
+package com.daou.tobytv7.sub;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Suber implements Subscriber<String> {
-	private Logger logger = LoggerFactory.getLogger(Suber.class);
+public class MySubscriber implements Subscriber<String> {
+	private Logger logger = LoggerFactory.getLogger(MySubscriber.class);
 
 	@Override
 	public void onSubscribe(Subscription s) {

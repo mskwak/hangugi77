@@ -1,22 +1,22 @@
-package com.daou.tobytv7.sub;
+package com.daou.tobytv7.pub;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Subtion implements Subscription {
-	private static Logger logger = LoggerFactory.getLogger(Subtion.class);
+public class MySubscription implements Subscription {
+	private static Logger logger = LoggerFactory.getLogger(MySubscription.class);
 	private Subscriber sub;
 
-	public Subtion(Subscriber sub) {
-		logger.info("Subtion.constructor");
+	public MySubscription(Subscriber sub) {
+		logger.info("MySubscription.constructor");
 		this.sub = sub;
 	}
 
 	@Override
 	public void request(long n) {
-		logger.info("Subtion.request()");
+		logger.info("MySubscription.request()");
 		sub.onNext("1");
 		sub.onNext("2");
 		sub.onNext("3");
@@ -27,6 +27,6 @@ public class Subtion implements Subscription {
 
 	@Override
 	public void cancel() {
-		logger.info("Subtion.cancel()");
+		logger.info("MySubscription.cancel()");
 	}
 }

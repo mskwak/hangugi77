@@ -1,15 +1,15 @@
-package com.daou.tobytv7.pub;
+package com.daou.tobytv7.sub;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Subtion implements Subscription {
-	private static Logger logger = LoggerFactory.getLogger(Subtion.class);
+public class MySubscription implements Subscription {
+	private static Logger logger = LoggerFactory.getLogger(MySubscription.class);
 	private Subscriber sub;
 
-	public Subtion(Subscriber sub) {
+	public MySubscription(Subscriber sub) {
 		logger.info("Subtion.constructor");
 		this.sub = sub;
 	}

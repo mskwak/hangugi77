@@ -11,9 +11,9 @@ public class Main {
 	public static Logger logger = LoggerFactory.getLogger(Main.class);
 
 	public static void main(String[] args) {
-		Publisher publisher = new Puber();
-		Subscriber subscriber = new Suber();
-		Subscriber subscriberOperator = new SuberOperator(subscriber);
+		Publisher publisher = new MyPublisher();
+		Subscriber subscriber = new MySubscriber();
+		Subscriber subscriberOperator = new SubscriberOperator(subscriber);
 		publisher.subscribe(subscriberOperator);
 		logger.info("main exit...");
 	}
