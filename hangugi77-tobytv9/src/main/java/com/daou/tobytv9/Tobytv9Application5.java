@@ -1,10 +1,14 @@
 package com.daou.tobytv9;
 
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.Netty4ClientHttpRequestFactory;
+import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +16,7 @@ import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.context.request.async.DeferredResult;
 
 @SpringBootApplication
+@Configuration
 public class Tobytv9Application5 {
 	@RestController
 	public static class MyController5 {
@@ -39,6 +44,11 @@ public class Tobytv9Application5 {
 
 			return dr;
 		}
+	}
+
+	@Bean
+	public EventLoopGroup eventLoopGroup() {
+		return new NioEventLoopGroup(3, new CustomizableThreadFactory("mskw"));
 	}
 
 	public static void main(String[] args) {

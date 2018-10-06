@@ -3,6 +3,7 @@ package com.daou.session.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -25,6 +26,13 @@ public class SecuriyConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .debug(true)
+                .ignoring().antMatchers("/resources/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 //        httpSecurity
 //                .httpBasic()
@@ -35,12 +43,15 @@ public class SecuriyConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest()
 //                .authenticated();
 
-        httpSecurity
-                .authorizeRequests()
-                    .anyRequest()
-                    .authenticated()
-                .and()
-                    .formLogin();
+//        httpSecurity
+//                .authorizeRequests()
+//                    .anyRequest()
+//                    .authenticated()
+//                .and()
+//                    .formLogin();
 
+// 아이디 및 패스워드를 요구하지 않고 / 페이지 요청 시 / 페이지가 출력(리턴) 된다.
+//        httpSecurity
+//            .formLogin();
     }
 }

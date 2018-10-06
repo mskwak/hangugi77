@@ -31,7 +31,7 @@ public class LoadTest4 {
                 inner.start();
 
                 String result = restTemplate.getForObject(url, String.class, idx);
-//                log.info(Thread.currentThread().getName() + ": " + result);
+                log.info(Thread.currentThread().getName() + ": " + result);
 
                 inner.stop();
                 log.info("Elapsed: {} {} / {}", idx, inner.getTotalTimeSeconds(), result);
