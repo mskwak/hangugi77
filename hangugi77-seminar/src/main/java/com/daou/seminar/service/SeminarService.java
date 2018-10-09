@@ -1,6 +1,6 @@
 package com.daou.seminar.service;
 
-import com.daou.seminar.model.Customer;
+import com.daou.seminar.entity.Customer;
 import io.r2dbc.spi.ConnectionFactory;
 import io.r2dbc.spi.Result;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,21 +1,16 @@
 package com.daou.seminar.controller;
 
-import com.daou.seminar.model.Customer;
+import com.daou.seminar.entity.Customer;
 import com.daou.seminar.service.SeminarService;
 import io.r2dbc.spi.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
-
-import java.time.Duration;
 
 @RestController
 @Slf4j
-public class HelloWorld {
+public class SeminarController {
 	@Autowired
 	private SeminarService seminarService;
 
@@ -27,14 +22,24 @@ public class HelloWorld {
 //		}).log().map(String::toUpperCase).log().cancelOn(Schedulers.immediate()).log();
 //	}
 
-	@GetMapping("/create")
+	@PostMapping("/create")
 	public Flux<Result> create() {
 		return seminarService.create(Long.valueOf("1"), "mskw");
 	}
 
-	@GetMapping("/delete")
-	public Flux<Result> delete() {
-		return  seminarService.delete(Long.valueOf("1"));
+	@PostMapping("/delete/{id}")
+	public Flux<Result> delete(@PathVariable Long id) {
+		return  seminarService.delete(id);
+	}
+
+	@PutMapping("modify/{id}")
+	public Flux<Result> modifyPut(@PathVariable Long id) {
+		return  seminarService.delete(id);
+	}
+
+	@GetMapping("modify/{id}")
+	public Flux<Result> modifyGet(@PathVariable Long id) {
+		return  seminarService.delete(id);
 	}
 
 	@GetMapping("/all")
