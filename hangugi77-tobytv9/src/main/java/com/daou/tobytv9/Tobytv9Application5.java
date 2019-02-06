@@ -3,6 +3,7 @@ package com.daou.tobytv9;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 @SpringBootApplication
 @Configuration
+@EnableAutoConfiguration
 public class Tobytv9Application5 {
 	@RestController
 	public static class MyController5 {

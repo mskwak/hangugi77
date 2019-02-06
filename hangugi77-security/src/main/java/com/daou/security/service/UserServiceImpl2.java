@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.HashSet;
 
-@Service("userServie")
-public class UserServiceImpl implements UserService {
+@Service
+public class UserServiceImpl2 implements UserService2 {
     @Autowired
     private UserRepository userRepository;
 
@@ -23,28 +23,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private TestPlainPasswordEncoder testPlainPasswordEncoder;
 
-    @Autowired
-    private UserService2 userService2;
+//    @Transactional
+    public void saveUser() {
+        for(int i = 71; i < 80; i++) {
 
-    @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
-    @Override
-    @Transactional
-    public void saveUser(User user) {
-        user.setPassword(testPlainPasswordEncoder.encode(user.getPassword()));
-        user.setActive(1);
-        Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        userRepository.save(user);
-
-        m1();
-    }
-
-    private void m1() {
-        for(int i = 61; i < 70; i++) {
+            if(i == 79) {
+                throw new  RuntimeException();
+            }
             User u = new User();
             u.setActive(1);
             u.setPassword(String.valueOf(i));
@@ -55,8 +40,5 @@ public class UserServiceImpl implements UserService {
             u.setRoles(new HashSet<Role>(Arrays.asList(uRole)));
             userRepository.save(u);
         }
-
-        userService2.saveUser();
-
     }
 }
