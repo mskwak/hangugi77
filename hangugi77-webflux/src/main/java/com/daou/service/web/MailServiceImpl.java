@@ -6,6 +6,5 @@ import org.springframework.stereotype.Service;
 public class MailServiceImpl implements MailService {
     @Override
     public void upload() {
-
     }
 }
