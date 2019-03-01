@@ -1,5 +1,6 @@
-package com.daou.service.web;
+package com.daou.service.core;
 
+import com.daou.service.core.MailService;
 import org.springframework.stereotype.Service;
 
 @Service

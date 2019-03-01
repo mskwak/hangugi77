@@ -1,5 +1,5 @@
 package com.daou.service.web;
 
-public interface MailService {
+public interface MailWebService {
     public void upload();
 }
