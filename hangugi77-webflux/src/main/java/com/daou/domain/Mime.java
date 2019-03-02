@@ -25,6 +25,10 @@ public class Mime {
         return new Mime(fileName);
     }
 
+    public static Mime valueOf() {
+        return new Mime("");
+    }
+
     @Getter
     @Setter
     public static class MimePart {

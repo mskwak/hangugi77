@@ -1,13 +1,10 @@
-package com.daou.service.web;
+package com.daou.service.core;
 
+import com.daou.WebfluxTest;
 import com.daou.domain.Mime;
-import com.daou.service.core.MimeParserService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
 import org.springframework.util.ResourceUtils;
 
@@ -17,9 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class MimeParserServiceImplTest {
+public class MimeParserServiceImplTest extends WebfluxTest {
     @Autowired
     private MimeParserService mimeParserService;
 
@@ -29,7 +24,7 @@ public class MimeParserServiceImplTest {
 
     @Test
     public void mimeParserServiceTest() throws MessagingException, FileNotFoundException {
-        File file = ResourceUtils.getFile("classpath:sample.eml");
+        File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "sample.eml");
         MimeMessage mimeMessage = new MimeMessage(null, new FileInputStream(file));
         Mime mime  = mimeParserService.getStructure(mimeMessage);
 

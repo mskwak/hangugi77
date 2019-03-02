@@ -15,10 +15,9 @@ import java.io.IOException;
 public class MimeParserServiceImpl implements MimeParserService {
     @Override
     public Mime getStructure(MimeMessage mimeMessage) {
-        Mime mime = Mime.valueOf("");
+        Mime mime = Mime.valueOf();
 
         try {
-
             Mime.MimePart mimePart = new Mime.MimePart();
             mimePart.setDepth(0);
             mimePart.setContentType(mimeMessage.getContentType());
@@ -30,6 +29,7 @@ public class MimeParserServiceImpl implements MimeParserService {
         } catch (MessagingException e) {
             log.error("", e);
         }
+
         return mime;
     }
 
