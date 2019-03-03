@@ -1,8 +1,5 @@
 package com.daou;
 
-import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
@@ -10,24 +7,26 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.web.reactive.config.EnableWebFlux;
-import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
-
-import java.util.concurrent.CompletableFuture;
 
 @EnableWebFlux
 @SpringBootApplication
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication springApplication = new SpringApplication(Application.class);
+		ConfigurableApplicationContext configurableApplicationContext = springApplication.run(args);
+		ConfigurableEnvironment configurableEnvironment = configurableApplicationContext.getEnvironment();
 
-		//		try(ConfigurableApplicationContext c = springApplication.run(args)) {
-		//		}
-
-		ConfigurableApplicationContext c = springApplication.run(args);
+//		configurableEnvironment.getSystemEnvironment().forEach((k, v) -> {
+//			System.out.println(k + ": " + (String) v);
+//		});
+//
+//		System.out.println("==============================================");
+//
+//		configurableEnvironment.getSystemProperties().forEach((k, v) -> {
+//			System.out.println(k + ": " + (String) v);
+//		});
 	}
 
 	@Bean
@@ -48,54 +47,5 @@ public class Application {
 				System.out.println("run22222...");
 			}
 		};
-	}
-
-	@RestController
-	public static class MyController {
-		@RequestMapping("/hello")
-		public Mono<String> hello() {
-			System.out.println("111111111111: " + Thread.currentThread().getName());
-			return Mono
-					.just("Hello Reactive")
-					.map(s -> s.toUpperCase())
-					.log()
-					.publishOn(Schedulers.newSingle("publishOn"))
-					.log();
-		}
-
-		@RequestMapping("/hello2")
-		public CompletableFuture<String> hello2() {
-			System.out.println("111111111111: " + Thread.currentThread().getName());
-
-			return CompletableFuture.supplyAsync(() -> {
-				System.out.println("222222222222: " + Thread.currentThread().getName());
-				return "hello world";
-			}).thenApplyAsync(s -> {
-				System.out.println("333333333333: " + Thread.currentThread().getName());
-				return s.toUpperCase();
-			});
-		}
-
-		@RequestMapping("/hello3")
-		public Publisher<String> hello3(String name) {
-			System.out.println("111111111111: " + Thread.currentThread().getName());
-			return new Publisher<String>() {
-				@Override
-				public void subscribe(Subscriber<? super String> s) {
-					s.onSubscribe(new Subscription() {
-						@Override
-						public void request(long n) {
-							s.onNext("Hello " + name);
-							s.onComplete();
-						}
-
-						@Override
-						public void cancel() {
-
-						}
-					});
-				}
-			};
-		}
 	}
 }
