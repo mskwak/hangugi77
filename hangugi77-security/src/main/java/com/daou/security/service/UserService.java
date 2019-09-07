@@ -1,8 +1,10 @@
 package com.daou.security.service;
 
 import com.daou.security.entity.User;
+import com.daou.security.model.UserModel;
 
 public interface UserService {
-    public User findByEmail(String email);
-    public void saveUser(User user);
+    User findByEmail(String email);
+    void saveUser(User user);
+    UserModel create();
 }

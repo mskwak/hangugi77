@@ -3,6 +3,7 @@ package com.daou.security.service;
 import com.daou.security.encoder.TestPlainPasswordEncoder;
 import com.daou.security.entity.Role;
 import com.daou.security.entity.User;
+import com.daou.security.model.UserModel;
 import com.daou.security.repository.RoleRepository;
 import com.daou.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.HashSet;
 
-@Service("userServie")
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
@@ -57,6 +58,16 @@ public class UserServiceImpl implements UserService {
         }
 
         userService2.saveUser();
+    }
 
+    public UserModel create() {
+        User user = new User();
+        user.setActive(1);
+        user.setPassword("ffff");
+        user.setEmail("hangugi77@naver.com");
+        user.setLastName("mskw");
+        user.setName("kwak");
+        userRepository.save(user);
+        return new UserModel();
     }
 }
