@@ -7,8 +7,8 @@
   <packaging>pom</packaging>
 	<modules>
 		<module>hangugi77-algorithm</module>
-		<module>hangugi77-zuul</module>
 		<module>hangugi77-java8inaction07</module>
+		<module>hangugi77-jpa</module>
 		<module>hangugi77-security</module>
 		<module>hangugi77-seminar</module>
 		<module>hangugi77-session</module>
@@ -20,6 +20,7 @@
 		<module>hangugi77-tobytv10</module>
 		<module>hangugi77-util</module>
 		<module>hangugi77-webflux</module>
+		<module>hangugi77-zuul</module>
 	</modules>
   
 	<properties>
