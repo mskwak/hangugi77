@@ -13,11 +13,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/")
-    public UserModel init() {
-        return userService.create();
-    }
-
     @GetMapping(value = "/get")
     public List<UserModel> get() {
         return userService.get();
