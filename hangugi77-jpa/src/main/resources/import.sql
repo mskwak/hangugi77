@@ -8,13 +8,15 @@
 
 INSERT INTO test_group(id, name) VALUES (1, '아시아');
 INSERT INTO test_group(id, name) VALUES (2, '북미');
-
+INSERT INTO test_group(id, name) VALUES (3, '유럽');
 
 INSERT INTO test_user(id, name, email, group_id) VALUES (1, '문재인', 'moon@daou.com', 1);
 INSERT INTO test_user(id, name, email, group_id) VALUES (2, '김정은', 'kim@daou.com', 1);
 INSERT INTO test_user(id, name, email, group_id) VALUES (3, '트럼프', 't@daou.com', 2);
 INSERT INTO test_user(id, name, email, group_id) VALUES (4, '시진핑', 'xi@daou.com',1);
-
+INSERT INTO test_user(id, name, email, group_id) VALUES (5, '두테르테', 'dute@daou.com',1);
+INSERT INTO test_user(id, name, email, group_id) VALUES (6, '아베', 'abe@daou.com',1);
+INSERT INTO test_user(id, name, email, group_id) VALUES (7, '메르켈', 'merkel@daou.com',3);
 
 -- INSERT INTO users(id, name, email) VALUES (1, '문재인', 'moon@daou.com');
 -- INSERT INTO users(id, name, email) VALUES (2, '김정은', 'kim@daou.com');

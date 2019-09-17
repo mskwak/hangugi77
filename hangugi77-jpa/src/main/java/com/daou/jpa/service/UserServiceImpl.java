@@ -1,22 +1,27 @@
 package com.daou.jpa.service;
 
-import com.daou.jpa.entity.Group;
+import com.daou.jpa.converter.UserConverter;
 import com.daou.jpa.entity.User;
 import com.daou.jpa.model.UserModel;
 import com.daou.jpa.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private GroupService groupService;
+    @NonNull
+    private final UserRepository userRepository;
+    @NonNull
+    private final GroupService groupService;
+    @NonNull
+    private final UserConverter userConverter;
 
     @Transactional
     public UserModel create() {
@@ -35,18 +40,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<UserModel> get() {
-        List<User> list = userRepository.findAll();
-        List<UserModel> userModelList = new ArrayList<>();
-        list.stream().forEach(l -> {
-            UserModel userModel = new UserModel();
-            userModel.setId(l.getId());
-            userModel.setName(l.getName());
-            userModel.setEmail(l.getEmail());
-            userModel.setGroupId(l.getGroup().getId());
-            userModelList.add(userModel);
-        });
-        return userModelList;
+    public List<UserModel> getUserList() {
+        return userRepository
+                .findAll()
+                .stream()
+                .map(u -> userConverter.convertUserToUserModel(u))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -60,11 +59,15 @@ public class UserServiceImpl implements UserService {
             }
         });
 
-        return get();
+        return getUserList();
     }
 
     @Override
     public void delete(User user) {
         userRepository.delete(user);
+    }
+
+    public Optional<User> getUserById(long id) {
+        return userRepository.findById(id);
     }
 }

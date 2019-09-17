@@ -1,30 +1,25 @@
 package com.daou.jpa.filter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
 import java.io.IOException;
 
-public class MyFilter implements Filter {
-    private static final Logger logger = LoggerFactory.getLogger(MyFilter.class);
-
+@Slf4j
+public class MyFirstFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        logger.info("init my filter...");
-        System.out.println("init my filter...");
+        log.info("init my first filter...");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        logger.info("do my filter...");
-        System.out.println("do my filter...");
+        log.info("do my first filter...");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
     public void destroy() {
-        logger.info("destroy my filter...");
-        System.out.println("destroy my filter...");
+        log.info("destroy my first filter...");
     }
 }
