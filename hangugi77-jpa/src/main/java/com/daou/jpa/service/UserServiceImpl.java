@@ -19,8 +19,6 @@ public class UserServiceImpl implements UserService {
     @NonNull
     private final UserRepository userRepository;
     @NonNull
-    private final GroupService groupService;
-    @NonNull
     private final UserConverter userConverter;
 
     @Transactional
